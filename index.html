@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bot</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+</head>
+<body>
+    <div id="connect"></div>
+    <button onclick="transaction()">Send TON</button>
+    <script>
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: "https://vilonwebx.github.io/ger/tonconnect-manifest.json",
+        buttonRootId: "connect"
+    });
+
+    async function transaction() {
+        const transaction = {
+            validUntil: Math.round(Date.now() / 1000) + 10, 
+            messages: [
+                {
+                    address: "0:UQBhlMg55GjCrHNms-c3ppVncwVwH3qf-rtWJ5XX1NsGQqIa",
+                    amount: "10000000"
+                }
+            ]
+        }
+
+        try {
+            await tonConnectUI.sendTransaction(transaction)
+        } catch(e) {
+          console.error(e)
+        }
+    }
+
+
+
+    </script>
+</body>
+</html>
